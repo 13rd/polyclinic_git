@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Список визитов{% endblock %}
+
+{% block content %}
+
+<h1>Список визитов</h1>
+
+<!-- Форма для фильтрации по дате -->
+<form method="GET">
+    <label for="start_date">Начальная дата:</label>
+    <input type="date" id="start_date" name="start_date" value="{{ start_date|default('') }}">
+    <br><br>
+    <label for="end_date">Конечная дата:</label>
+    <input type="date" id="end_date" name="end_date" value="{{ end_date|default('') }}">
+    <br><br>
+    <button type="submit">Применить фильтр</button>
+</form>
+<br>
+
+<!-- Кнопка для вывода сегодняшних визитов -->
+<a href="?today=true"><button>Сегодняшние визиты</button></a>
+<a href="/get_visits"><button>Отменить фильтры</button></a>
+
+<!-- Таблица с визитами -->
+<table border="1">
+    <tr>
+        <th>Дата</th>
+        <th>Время</th>
+        <th>ФИО</th>
+        <th>Диагноз</th>
+        <th>Действия</th>
+    </tr>
+    {% for visit in visits %}
+    <tr>
+        <td>{{ visit.date }}</td>
+        <td>{{ visit.time }}</td>
+        <td>{{ visit.full_name }}</td>
+        <td>{{ visit.diagnos }}</td>
+        <td>
+            <a href="/update_visit/{{ visit.visit_id }}">Редактировать</a>
+            <a href="/visit/{{ visit.visit_id }}">Открыть визит</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

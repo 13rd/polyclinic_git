@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Регистрация пациента{% endblock %}
+
+{% block content %}
+
+    <h1>Создание нового пациента</h1>
+
+    <form method="POST">
+        <label for="first_name">Имя:</label>
+        <input type="text" id="first_name" name="first_name" required><br><br>
+        <label for="last_name">Фамилия:</label>
+        <input type="text" id="last_name" name="last_name" required><br><br>
+        <label for="middle_name">Отчество:</label>
+        <input type="text" id="middle_name" name="middle_name"><br><br>
+        <label for="birth_date">Дата рождения:</label>
+        <input type="date" id="birth_date" name="birth_date" required><br><br>
+        <label for="adress">Адрес:</label>
+        <input type="text" id="adress" name="adress" required><br><br>
+
+        <input type="submit" value="Создать пациента">
+    </form>
+{% endblock %}

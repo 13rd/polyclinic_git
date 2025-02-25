@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Регистрация администратора{% endblock %}
+
+{% block content %}
+
+    <h1>Создание нового администратора</h1>
+
+    <form method="POST">
+
+        <label for="username">Логин:</label>
+        <input type="text" id="username" name="username"><br><br>
+
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password"><br><br>
+
+        <input type="submit" value="Создать администратора">
+    </form>
+{% endblock %}

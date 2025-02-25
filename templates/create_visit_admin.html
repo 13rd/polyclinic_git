@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Создание визита (врач){% endblock %}
+
+{% block content %}
+<h1>Создание визита</h1>
+    <form method="POST">
+        <label for="patient_id">ID пациента:</label>
+        <select id="patient_id" name="patient_id" required>
+            <option value="">-- Выберите пациента --</option>
+            {% for patient in patients %}
+                <option value="{{ patient.patient_id }}">{{ patient.first_name + " " + patient.last_name + " " + patient.middle_name + " " + patient.birth_date }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="visit_date">Дата визита:</label>
+        <input type="datetime-local" id="visit_date" name="visit_date" step="any" placeholder="YYYY-MM-DDThh:mm:ss.zzz UTC:" required>
+        <br>
+        <select id="doctor_id" name="doctor_id" required>
+            <option value="">-- Выберите доктора --</option>
+            {% for doctor in doctors %}
+                <option value="{{ doctor.doctor_id }}">{{ doctor.first_name + " " + doctor.last_name + " " + doctor.middle_name}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit">Создать визит</button>
+    </form>
+{% endblock %}

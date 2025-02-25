@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Список визитов{% endblock %}
+
+{% block content %}
+
+<h1>Информация о визите</h1>
+
+<div class="record-details">
+    <div class="detail">
+        <span class="label">Дата и время:</span> {{ visit.datetime }}
+    </div>
+    <div class="detail">
+        <span class="label">ФИО пациента:</span> {{ visit.full_name }}
+    </div>
+    <div class="detail">
+        <span class="label">Диагноз:</span> {{ visit.diagnos }}
+    </div>
+    <div class="detail">
+        <span class="label">Имя врача:</span> {{ visit.doctor_name }}
+    </div>
+    <div class="detail">
+        {% if visit.diagnos == "Не поставлен" %}
+            <form method="POST" action="/update_visit">
+                <label for="diagnos_id">Диагноз:</label>
+                <select id="diagnos_id" name="diagnos_id" required>
+                    <option value="">-- Выберите диагноз --</option>
+                    {% for diagnos in diagnosis %}
+                        <option value="{{ diagnos.diagnosis_id }}">{{ diagnos.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="hidden" id="visit_id" name="visit_id" value="{{ visit.visit_id }}">
+                <br>
+                <button type="submit">Поставить диагноз</button>
+            </form>
+        {% else %}
+            <span class="label">Диагноз:</span> {{ visit.diagnos }}
+        {% endif %}
+
+
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+

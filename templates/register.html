@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+<form method="post" action="/auth/register">
+        <div class="container">
+            <h1>Регистрация</h1>
+            <label for="username">Имя пользователя</label>
+            <input type="text" id="username" name="username" placeholder="Введите имя пользователя" required autofocus>
+            <label for="password">Пароль</label>
+            <input type="password" id="password" name="password" placeholder="Введите пароль" required autofocus>
+            <label for="role">Роль</label>
+            <select id="role" name="role" required>
+                <option value="">-- Выберите роль --</option>
+                <option value="admin">Админ</option>
+                <option value="doctor">Доктор</option>
+            </select>
+            <button type="submit">Зарегистрироваться</button>
+        </div>
+    </form>
+{% endblock %}

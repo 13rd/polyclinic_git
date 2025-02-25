@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список врачей</title>
+</head>
+<body>
+    <h1>Список врачей</h1>
+    <table border="1">
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Специализация</th>
+            <th>Опыт</th>
+            <th>Действия</th>
+        </tr>
+        {% for doctor in doctors %}
+        <tr>
+            <td>{{ doctor.first_name }}</td>
+            <td>{{ doctor.last_name }}</td>
+            <td>{{ doctor.specialty }}</td>
+            <td>{{ doctor.experience }}</td>
+            <td>
+                <a href="/update_doctor/{{ doctor.id }}">Редактировать</a>
+                <a href="/delete_doctor/{{ doctor.id }}">Удалить</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

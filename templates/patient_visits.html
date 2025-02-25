@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Список визитов пациента{% endblock %}
+
+{% block content %}
+
+<h1>Список визитов пациента</h1>
+
+<!-- Форма для фильтрации по дате -->
+<form method="GET">
+        <select id="patient_id" name="patient_id" required>
+            <option value="">-- Выберите пациента --</option>
+            {% for patient in patients %}
+                <option value="{{ patient.patient_id }}">{{ patient.first_name + " " + patient.last_name + " " + patient.middle_name}}</option>
+            {% endfor %}
+        </select>
+    <br><br>
+    <label for="start_date">Начальная дата:</label>
+    <input type="date" id="start_date" name="start_date" value="{{ start_date|default('') }}">
+    <br><br>
+    <label for="end_date">Конечная дата:</label>
+    <input type="date" id="end_date" name="end_date" value="{{ end_date|default('') }}">
+    <br><br>
+    <button type="submit">Применить фильтр</button>
+</form>
+<br>
+
+<!-- Кнопка для вывода сегодняшних визитов -->
+<!--<a href="?today=true"><button>Сегодняшние визиты</button></a>-->
+<a href="/get_patient_card"><button>Отменить фильтры</button></a>
+<h2>{{ patient_name }}</h2>{% if patient_name %}  <a href="/admin/update_patient/{{ patient_db.patient_id }}">Изменить пациента</a> <a href="/admin/delete_patient/{{ patient_db.patient_id }}">Удалить пациента</a> {% endif %}
+<!-- Таблица с визитами -->
+<table border="1">
+    <tr>
+        <th>Дата</th>
+        <th>Время</th>
+        <th>ФИО</th>
+        <th>Диагноз</th>
+        <th>Действия</th>
+    </tr>
+    {% for visit in visits %}
+    <tr>
+        <td>{{ visit.date }}</td>
+        <td>{{ visit.time }}</td>
+        <td>{{ visit.full_name }}</td>
+        <td>{{ visit.diagnos }}</td>
+        <td>
+            <a href="/visit/{{ visit.visit_id }}">Открыть визит</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

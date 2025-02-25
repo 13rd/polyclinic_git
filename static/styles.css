@@ -1,0 +1,129 @@
+/* Общие стили */
+body {
+  background: linear-gradient(135deg, #121212, #202020); /* Градиентный фон */
+  color: #fafafa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Более современный шрифт */
+  margin: 0;
+  padding: 0;
+}
+
+/* Ссылки */
+a {
+  color: #8ab4f8;
+  text-decoration: none;
+  transition: color 0.3s ease, text-decoration 0.3s ease; /* Плавный переход цвета и подчеркивания */
+}
+a:hover,
+a:focus {
+  color: #6cc6ff; /* Более светлый оттенок при наведении */
+  text-decoration: underline;
+}
+
+/* Заголовки */
+h1, h2, h3, h4, h5, h6 {
+  color: #c9d1d9;
+  margin-bottom: 10px;
+  font-weight: bold; /* Жирное начертание */
+}
+
+/* Кнопки */
+button,
+input[type="submit"],
+input[type="button"] {
+  background: linear-gradient(135deg, #303030, #404040); /* Градиент для кнопок */
+  border: none;
+  color: #fff;
+  padding: 12px 24px;
+  cursor: pointer;
+  border-radius: 5px; /* Закругленные углы */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Анимация при наведении */
+  font-size: 16px;
+}
+button:hover,
+button:focus,
+input[type="submit"]:hover,
+input[type="submit"]:focus,
+input[type="button"]:hover,
+input[type="button"]:focus {
+  background: linear-gradient(135deg, #505050, #606060); /* Более светлый градиент при наведении */
+  transform: scale(1.05); /* Легкое увеличение размера */
+}
+
+/* Поля ввода */
+input[type="text"],
+textarea {
+  background-color: #202020;
+  color: #ccc;
+  border: 1px solid #404040;
+  padding: 12px;
+  border-radius: 5px; /* Закругленные углы */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Плавный переход рамки и тени */
+  width: 100%; /* Полная ширина родительского контейнера */
+  font-size: 16px;
+}
+input[type="text"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #8ab4f8;
+  box-shadow: 0 0 8px rgba(138, 180, 248, 0.5); /* Небольшая тень при фокусе */
+}
+input[type="password"],
+textarea {
+  background-color: #202020;
+  color: #ccc;
+  border: 1px solid #404040;
+  padding: 12px;
+  border-radius: 5px; /* Закругленные углы */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Плавный переход рамки и тени */
+  width: 100%; /* Полная ширина родительского контейнера */
+  font-size: 16px;
+}
+input[type="password"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #8ab4f8;
+  box-shadow: 0 0 8px rgba(138, 180, 248, 0.5); /* Небольшая тень при фокусе */
+}
+
+
+/* Контейнеры и блоки */
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 25px;
+  background: linear-gradient(135deg, #181818, #222222); /* Градиентный фон контейнера */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Более выраженная тень */
+  border-radius: 10px; /* Закругленные углы */
+}
+
+/* Дополнительные стили для .stat и .ll */
+.stat {
+  width: 60%;
+  height: 70%;
+  margin: 20px auto;
+  background: linear-gradient(135deg, #1c1c1c, #282828); /* Градиент для статистики */
+  border-radius: 10px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4); /* Тень для статистики */
+  /*display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;*/
+}
+
+.ll {
+  display: block;
+  padding: 15px;
+  background: linear-gradient(135deg, #1e1e1e, #2a2a2a); /* Градиент для списка */
+  border-radius: 5px;
+  margin-bottom: 10px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+.ll:hover {
+  background: linear-gradient(135deg, #303030, #404040); /* Более светлый градиент при наведении */
+  transform: scale(1.03); /* Легкое увеличение размера */
+}
+
+/* Отступы между элементами */
+form > * {
+  margin-bottom: 15px; /* Равномерные отступы между элементами формы */
+}

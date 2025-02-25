@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Статистика посещений{% endblock %}
+
+{% block content %}
+
+    <form method="GET">
+    <label for="start_date_visits">Начальная дата:</label>
+    <input type="date" id="start_date_visits" name="start_date_visits" value="{{ start_date_visits|default('') }}">
+    <br><br>
+    <label for="end_date_visits">Конечная дата:</label>
+    <input type="date" id="end_date_visits" name="end_date_visits" value="{{ end_date_visits|default('') }}">
+    <br><br>
+    <button type="submit">Применить фильтр</button>
+    </form>
+    <br>
+
+    <canvas id="myChart" ></canvas>
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const chartData = {
+            labels: [{% for label in labels %}'{{ label }}', {% endfor %}],
+            datasets: [{
+                label: 'Количество посещений',
+                data: [{% for item in data %}{{ item }}, {% endfor %}],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        };
+        new Chart(ctx, {
+            type: 'bar',
+            data: chartData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+
+
+
+{% endblock %}

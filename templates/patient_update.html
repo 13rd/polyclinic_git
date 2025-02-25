@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Обновление данных пациента{% endblock %}
+{% block content %}
+
+    <h1>Обновление данных пациента</h1>
+    <form method="POST">
+        <!-- Имя -->
+        <label for="first_name">Имя:</label>
+        <input type="text" id="first_name" name="first_name" value="{{ patient.first_name }}"><br><br>
+
+        <!-- Фамилия -->
+        <label for="last_name">Фамилия:</label>
+        <input type="text" id="last_name" name="last_name" value="{{ patient.last_name }}"><br><br>
+
+        <!-- Отчество -->
+        <label for="middle_name">Отчество:</label>
+        <input type="text" id="middle_name" name="middle_name" value="{{ patient.middle_name }}"><br><br>
+
+        <!-- Опыт -->
+        <label for="birth_date">Дата рождения:</label>
+        <input type="date" id="birth_date" name="birth_date" value="{{ patient.birth_date }}"><br><br>
+
+        <label for="adress">Адрес:</label>
+        <input type="text" id="adress" name="adress" value="{{ patient.address }}"><br><br>
+        <!-- Кнопка отправки -->
+        <input type="submit" value="Обновить данные пациента">
+    </form>
+{% endblock %}

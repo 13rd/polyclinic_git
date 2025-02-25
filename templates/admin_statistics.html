@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block title %}Статистика посещений{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>Список врачей</h1>
+        <br>
+        <form method="GET">
+            <select id="specialties_id" name="specialties_id" required>
+                <option value="None">Все специальности</option>
+                {% for specialty in specialties %}
+                    <option value="{{ specialty.specialties_id }}">{{ specialty.specialties_name }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <button type="submit">Применить фильтр</button>
+        </form>
+        <br>
+        <table border="1" style="width: 100%;">
+            <tr>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Отчество</th>
+                <th>Специализация</th>
+                <th>Опыт</th>
+                <th>Действия</th>
+            </tr>
+            {% for doctor in doctors %}
+            <tr>
+                <td>{{ doctor.first_name }}</td>
+                <td>{{ doctor.last_name }}</td>
+                <td>{{ doctor.middle_name }}</td>
+                <td>{{ doctor.specialty }}</td>
+                <td>{{ doctor.experience }}</td>
+                <td>
+                    <a href="/admin/update_doctor/{{ doctor.doctor_id }}">Редактировать</a>
+                    <a href="/admin/delete_doctor/{{ doctor.doctor_id }}">Удалить</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="stat">
+        <h2 style="text-align: center; margin-bottom: 20px;">Статистика приёмов у врачей</h2>
+        <form method="GET" style="text-align: center;">
+            <label for="start_date_visits">Начальная дата:</label>
+            <input type="date" id="start_date_visits" name="start_date_visits" value="{{ start_date_visits|default('') }}">
+            <br><br>
+            <label for="end_date_visits">Конечная дата:</label>
+            <input type="date" id="end_date_visits" name="end_date_visits" value="{{ end_date_visits|default('') }}">
+            <br><br>
+            <button type="submit">Применить фильтр</button>
+        </form>
+        <br>
+        <canvas id="visits" style="max-width: 100%; height: auto;"></canvas>
+        <script>
+            const ctx = document.getElementById('visits').getContext('2d');
+            const chartData = {
+                labels: [{% for label in labels_visits %}'{{ label }}', {% endfor %}],
+                datasets: [{
+                    label: 'Количество посещений',
+                    data: [{% for item in data_visits %}{{ item }}, {% endfor %}],
+                    backgroundColor: 'rgba(54, 162, 235, 0.25)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            };
+            new Chart(ctx, {
+                type: 'bar',
+                data: chartData,
+                options: {
+                    responsive: true, // График адаптируется под размер контейнера
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+    </div>
+
+    <div class="stat">
+        <h2 style="text-align: center; margin-bottom: 20px;">Статистика случаев заболеваний</h2>
+        <form method="GET" style="text-align: center;">
+            <label for="start_date_diagnos">Начальная дата:</label>
+            <input type="date" id="start_date_diagnos" name="start_date_diagnos" value="{{ start_date_diagnos|default('') }}">
+            <br><br>
+            <label for="end_date_diagnos">Конечная дата:</label>
+            <input type="date" id="end_date_diagnos" name="end_date_diagnos" value="{{ end_date_diagnos|default('') }}">
+            <br><br>
+            <button type="submit">Применить фильтр</button>
+        </form>
+        <br>
+        <canvas id="diagnosis" style="max-width: 100%; height: auto;"></canvas>
+        <script>
+            var dynamicColors = function() {
+                var r = Math.floor(Math.random() * 255);
+                var g = Math.floor(Math.random() * 255);
+                var b = Math.floor(Math.random() * 255);
+                return "rgb(" + r + "," + g + "," + b + ",0.5)";
+            };
+            const ctx2 = document.getElementById('diagnosis').getContext('2d');
+            const chartData2 = {
+                labels: [{% for label in labels_diagnos %}'{{ label }}', {% endfor %}],
+                datasets: [{
+                    label: 'Количество случаев заболевания',
+                    data: [{% for item in data_diagnos %}{{ item }}, {% endfor %}],
+                    backgroundColor: [{% for item in data_diagnos %}dynamicColors(), {% endfor %}],
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            };
+            new Chart(ctx2, {
+                type: 'pie',
+                data: chartData2,
+                options: {
+                    responsive: true, // График адаптируется под размер контейнера
+                }
+            });
+        </script>
+    </div>
+{% endblock %}

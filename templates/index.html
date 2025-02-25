@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Страница входа{% endblock %}
+
+{% block content %}
+
+    <h2>Главная страница</h2>
+
+    <p>Пользователь: {{ user.username }}</p>
+    <p>Роль: {{ user.role }}</p>
+    {% if 'user' not in session %}
+        <p>Войдите в систему</p>
+    {% elif user.role == 'doctor' %}
+        <a class="ll" href={{ url_for('doctors.create_visit_route') }}>Добавить визит</a>
+        <a class="ll" href={{ url_for('doctors.get_visits_route') }}>Посмотреть визиты</a>
+        <a class="ll" href={{ url_for('admin.statistics') }}>Посмотреть статистику</a>
+    {% else %}
+        <a class="ll" href={{ url_for('admin.add_doctor') }}>Добавить доктора</a>
+        <a class="ll" href={{ url_for('admin.add_patient') }}>Добавить пациента</a>
+        <a class="ll" href={{ url_for('admin.add_admin') }}>Добавить администратора</a>
+        <a class="ll" href={{ url_for('doctors.create_visit_route') }}>Добавить визит</a>
+        <a class="ll" href={{ url_for('doctors.get_visits_route') }}>Посмотреть все визиты</a>
+        <a class="ll" href={{ url_for('admin.get_patient_card_route') }}>Посмотреть карту пациента</a>
+        <a class="ll" href={{ url_for('admin.statistics') }}>Посмотреть всю статистику</a>
+    {% endif %}
+
+
+
+{% endblock %}
